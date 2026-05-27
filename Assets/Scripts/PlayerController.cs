@@ -15,14 +15,13 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        // Change this from GetComponentInChildren to plain GetComponent
-        anim = GetComponent<Animator>();
-
-        // Safety Check
-        if (anim == null)
+// This ensures it grabs the animator on the player itself, 
+    // not a global one or one attached to an enemy prefab by mistake
+        anim = GetComponent<Animator>(); 
+    
+     if (anim == null)
         {
-            Debug.LogError("ERROR: Animator component missing from this GameObject! Please add an Animator component directly to the parent Player object.", this);
+           anim = GetComponentInChildren<Animator>();
         }
     }
 
